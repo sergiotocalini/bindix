@@ -1,0 +1,2 @@
+# bindix
+Zabbix Agent - Bind
