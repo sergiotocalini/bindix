@@ -1,0 +1,2 @@
+BIND_URL="http://localhost:8653/xml"
+CACHE_TTL=1
