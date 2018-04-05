@@ -127,7 +127,7 @@ get_stats_memory() {
 get_service() {
     resource=${1}
 
-    port=`echo "${NGINX_URL}" | sed -e 's|.*://||g' -e 's|/||g' | awk -F: '{print $2}'`
+    port=`echo "${BIND_URL}" | sed -e 's|.*://||g' -e 's|/||g' | awk -F: '{print $2}'`
     pid=`sudo lsof -Pi :${port:-80} -sTCP:LISTEN -t | head -1`
     rcode="${?}"
     if [[ ${resource} == 'listen' ]]; then
