@@ -87,9 +87,13 @@ get_stats_zone() {
     name=${4}
     
     cache=$(refresh_cache)
-    if [[ -n ${zone} && -n ${type} && -n ${name} ]]; then
+    if [[ -n ${zone} ]]; then
 	zone_path="/statistics/views/view[@name=\"${view}\"]/zones/zone[@name=\"${zone}\"]"
-	attr_path="${zone_path}/counters[@type=\"${type}\"]/counter[@name=\"${name}\"]"
+	if [[ ${type} =~ (serial) ]]; then
+	    attr_path="${zone_path}/serial"
+	else
+	    attr_path="${zone_path}/counters[@type=\"${type}\"]/counter[@name=\"${name}\"]"
+	fi
 	res=`xmlstarlet sel -T -t -m ${attr_path} -v . -n "${cache}"`
     fi
     echo ${res:-0}
