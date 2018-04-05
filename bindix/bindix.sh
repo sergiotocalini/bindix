@@ -73,7 +73,7 @@ discovery() {
 	    for zone in `xmlstarlet sel -T -t -m ${path} -v . -n "${cache}"`; do
 		path="${zone_path}/zone[@name=\"${zone}\"]/@rdataclass"
 		rdataclass=`xmlstarlet sel -T -t -m ${path} -v . -n "${cache}"`
-		echo "${zone}|${rdataclass}|${serial}|${view}"
+		echo "${zone}|${rdataclass}|${view}"
 	    done
 	done
     fi
