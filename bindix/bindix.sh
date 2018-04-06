@@ -67,12 +67,13 @@ discovery() {
     IFS=${IFS_DEFAULT}
     cache=$(refresh_cache)
     if [[ ${resource} == 'zones' ]]; then
-	for view in `xmlstarlet sel -q -T -t -m /statistics/views/view/@name -v . -n "${cache}"`; do
+	path="/statistics/views/view/@name"
+	for view in `xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}" 2>/dev/null`; do
 	    zone_path="/statistics/views/view[@name=\"${view}\"]/zones"
 	    path="${zone_path}/zone[serial>0]/@name"
-	    for zone in `xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}"`; do
+	    for zone in `xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}" 2>/dev/null`; do
 		path="${zone_path}/zone[@name=\"${zone}\"]/@rdataclass"
-		rdataclass=`xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}"`
+		rdataclass=`xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}" 2>/dev/null`
 		echo "${zone}|${rdataclass}|${view}"
 	    done
 	done
@@ -94,7 +95,7 @@ get_stats_zone() {
 	else
 	    attr_path="${zone_path}/counters[@type=\"${type}\"]/counter[@name=\"${name}\"]"
 	fi
-	res=`xmlstarlet sel -q -T -t -m ${attr_path} -v . -n "${cache}"`
+	res=`xmlstarlet sel -q -T -t -m ${attr_path} -v . -n "${cache}" 2>/dev/null`
     fi
     echo ${res:-0}
 }
@@ -110,7 +111,7 @@ get_stats_server() {
     else
 	path="/statistics/server/counters[@type=\"${type}\"]/counter[@name=\"${attr}\"]"
     fi
-    res=`xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}"`
+    res=`xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}" 2>/dev/null`
     echo ${res:-0}
 }
 
@@ -120,7 +121,7 @@ get_stats_memory() {
 
     cache=$(refresh_cache)
     path="/statistics/memory/${type}/${attr}"
-    res=`xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}"`
+    res=`xmlstarlet sel -q -T -t -m ${path} -v . -n "${cache}" 2>/dev/null`
     echo ${res:-0}
 }
 
