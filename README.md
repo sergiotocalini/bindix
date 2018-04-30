@@ -8,8 +8,7 @@ Bind has to have the statistics enable to make it work, please add the following
 #~ cat named.conf
 ...
 statistics-channels {
-        inet 10.1.10.10 port 8080 allow { 192.168.2.10; 10.1.10.2; };
-        inet 127.0.0.1 port 8080 allow { 127.0.0.1; };
+        inet 127.0.0.1 port 8653 allow { 127.0.0.1; };
 };
 ...
 #~
