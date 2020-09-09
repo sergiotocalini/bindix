@@ -1,5 +1,11 @@
 # bindix
-Zabbix Agent - Bind
+Bind Monitoring
+
+This script is part of a monitoring solution that allows to monitor several
+services and applications.
+
+For more information about this monitoring solution please check out this post
+on my [site](https://sergiotocalini.github.io/project/monitoring).
 
 # Dependencies
 Bind has to have the statistics enable to make it work, please add the following options in named.conf:
@@ -56,7 +62,7 @@ BIND_URL|http://localhost:8653/xml
 ## Zabbix
 ```
 #~ git clone https://github.com/sergiotocalini/bindix.git
-#~ sudo ./bindix/deploy_zabbix.sh "${BIND_URL}"
+#~ sudo ./bindix/deploy_zabbix.sh -u "${BIND_URL}"
 #~ sudo systemctl restart zabbix-agent
 ```
 
